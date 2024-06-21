@@ -10,6 +10,6 @@ import com.Library.OnlineLibrary.domain.entities.User;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
 
-    @Mapping(source =  = "", target = "")
     GetUser userToGetDTO(User user);
+
 }

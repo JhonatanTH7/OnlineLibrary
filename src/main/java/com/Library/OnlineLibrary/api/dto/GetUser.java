@@ -1,5 +1,10 @@
 package com.Library.OnlineLibrary.api.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 public class GetUser {
     
     private Long id;
