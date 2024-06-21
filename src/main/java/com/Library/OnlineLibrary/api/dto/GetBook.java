@@ -13,14 +13,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetUser {
+public class GetBook {
 
     private Long id;
-    private String userName;
-    private String password;
-    private String email;
-    private String fullName;
-    private String role;
+    private String title;
+    private String author;
+    private Integer publicationYear;
+    private String genre;
+    private String isbn;
     private List<GetReservation> reservations;
     private List<GetLoan> loans;
 
