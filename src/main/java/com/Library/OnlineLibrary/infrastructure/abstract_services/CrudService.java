@@ -1,12 +1,12 @@
 package com.Library.OnlineLibrary.infrastructure.abstract_services;
 
-public interface CrudService<REQUEST, RESPONSE, TYPE> {
+public interface CrudService<DTO, TYPE> {
 
-    RESPONSE getById(Long id);
+    DTO getById(TYPE id);
 
-    RESPONSE create(REQUEST request);
+    DTO create(DTO request);
 
-    RESPONSE update(REQUEST request, TYPE id);
+    DTO update(DTO request, TYPE id);
 
     void delete(TYPE id);
 
