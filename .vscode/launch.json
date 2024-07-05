@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-OnlineLibraryApplication<OnlineLibrary>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.Library.OnlineLibrary.OnlineLibraryApplication",
+      "projectName": "OnlineLibrary",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
