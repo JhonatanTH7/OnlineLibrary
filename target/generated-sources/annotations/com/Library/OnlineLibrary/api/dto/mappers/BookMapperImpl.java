@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-21T12:54:51-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
+    date = "2024-07-05T07:07:19-0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class BookMapperImpl implements BookMapper {
@@ -27,14 +27,14 @@ public class BookMapperImpl implements BookMapper {
 
         GetBook.GetBookBuilder getBook = GetBook.builder();
 
-        getBook.id( book.getId() );
-        getBook.title( book.getTitle() );
         getBook.author( book.getAuthor() );
-        getBook.publicationYear( book.getPublicationYear() );
         getBook.genre( book.getGenre() );
+        getBook.id( book.getId() );
         getBook.isbn( book.getIsbn() );
-        getBook.reservations( reservationListToGetReservationList( book.getReservations() ) );
         getBook.loans( loanListToGetLoanList( book.getLoans() ) );
+        getBook.publicationYear( book.getPublicationYear() );
+        getBook.reservations( reservationListToGetReservationList( book.getReservations() ) );
+        getBook.title( book.getTitle() );
 
         return getBook.build();
     }
@@ -45,47 +45,18 @@ public class BookMapperImpl implements BookMapper {
             return null;
         }
 
-        Book.BookBuilder book = Book.builder();
+        Book book = new Book();
 
-        book.id( getBook.getId() );
-        book.title( getBook.getTitle() );
-        book.author( getBook.getAuthor() );
-        book.publicationYear( getBook.getPublicationYear() );
-        book.genre( getBook.getGenre() );
-        book.isbn( getBook.getIsbn() );
-        book.reservations( getReservationListToReservationList( getBook.getReservations() ) );
-        book.loans( getLoanListToLoanList( getBook.getLoans() ) );
+        book.setAuthor( getBook.getAuthor() );
+        book.setGenre( getBook.getGenre() );
+        book.setId( getBook.getId() );
+        book.setIsbn( getBook.getIsbn() );
+        book.setLoans( getLoanListToLoanList( getBook.getLoans() ) );
+        book.setPublicationYear( getBook.getPublicationYear() );
+        book.setReservations( getReservationListToReservationList( getBook.getReservations() ) );
+        book.setTitle( getBook.getTitle() );
 
-        return book.build();
-    }
-
-    protected GetReservation reservationToGetReservation(Reservation reservation) {
-        if ( reservation == null ) {
-            return null;
-        }
-
-        GetReservation.GetReservationBuilder getReservation = GetReservation.builder();
-
-        getReservation.id( reservation.getId() );
-        getReservation.reservationDate( reservation.getReservationDate() );
-        getReservation.status( reservation.getStatus() );
-        getReservation.user( reservation.getUser() );
-        getReservation.book( reservation.getBook() );
-
-        return getReservation.build();
-    }
-
-    protected List<GetReservation> reservationListToGetReservationList(List<Reservation> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<GetReservation> list1 = new ArrayList<GetReservation>( list.size() );
-        for ( Reservation reservation : list ) {
-            list1.add( reservationToGetReservation( reservation ) );
-        }
-
-        return list1;
+        return book;
     }
 
     protected GetLoan loanToGetLoan(Loan loan) {
@@ -95,12 +66,12 @@ public class BookMapperImpl implements BookMapper {
 
         GetLoan.GetLoanBuilder getLoan = GetLoan.builder();
 
+        getLoan.book( loan.getBook() );
         getLoan.id( loan.getId() );
         getLoan.loanDate( loan.getLoanDate() );
         getLoan.returnDate( loan.getReturnDate() );
         getLoan.status( loan.getStatus() );
         getLoan.user( loan.getUser() );
-        getLoan.book( loan.getBook() );
 
         return getLoan.build();
     }
@@ -118,30 +89,30 @@ public class BookMapperImpl implements BookMapper {
         return list1;
     }
 
-    protected Reservation getReservationToReservation(GetReservation getReservation) {
-        if ( getReservation == null ) {
+    protected GetReservation reservationToGetReservation(Reservation reservation) {
+        if ( reservation == null ) {
             return null;
         }
 
-        Reservation.ReservationBuilder reservation = Reservation.builder();
+        GetReservation.GetReservationBuilder getReservation = GetReservation.builder();
 
-        reservation.id( getReservation.getId() );
-        reservation.reservationDate( getReservation.getReservationDate() );
-        reservation.status( getReservation.getStatus() );
-        reservation.user( getReservation.getUser() );
-        reservation.book( getReservation.getBook() );
+        getReservation.book( reservation.getBook() );
+        getReservation.id( reservation.getId() );
+        getReservation.reservationDate( reservation.getReservationDate() );
+        getReservation.status( reservation.getStatus() );
+        getReservation.user( reservation.getUser() );
 
-        return reservation.build();
+        return getReservation.build();
     }
 
-    protected List<Reservation> getReservationListToReservationList(List<GetReservation> list) {
+    protected List<GetReservation> reservationListToGetReservationList(List<Reservation> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<Reservation> list1 = new ArrayList<Reservation>( list.size() );
-        for ( GetReservation getReservation : list ) {
-            list1.add( getReservationToReservation( getReservation ) );
+        List<GetReservation> list1 = new ArrayList<GetReservation>( list.size() );
+        for ( Reservation reservation : list ) {
+            list1.add( reservationToGetReservation( reservation ) );
         }
 
         return list1;
@@ -154,12 +125,12 @@ public class BookMapperImpl implements BookMapper {
 
         Loan.LoanBuilder loan = Loan.builder();
 
+        loan.book( getLoan.getBook() );
         loan.id( getLoan.getId() );
         loan.loanDate( getLoan.getLoanDate() );
         loan.returnDate( getLoan.getReturnDate() );
         loan.status( getLoan.getStatus() );
         loan.user( getLoan.getUser() );
-        loan.book( getLoan.getBook() );
 
         return loan.build();
     }
@@ -172,6 +143,35 @@ public class BookMapperImpl implements BookMapper {
         List<Loan> list1 = new ArrayList<Loan>( list.size() );
         for ( GetLoan getLoan : list ) {
             list1.add( getLoanToLoan( getLoan ) );
+        }
+
+        return list1;
+    }
+
+    protected Reservation getReservationToReservation(GetReservation getReservation) {
+        if ( getReservation == null ) {
+            return null;
+        }
+
+        Reservation.ReservationBuilder reservation = Reservation.builder();
+
+        reservation.book( getReservation.getBook() );
+        reservation.id( getReservation.getId() );
+        reservation.reservationDate( getReservation.getReservationDate() );
+        reservation.status( getReservation.getStatus() );
+        reservation.user( getReservation.getUser() );
+
+        return reservation.build();
+    }
+
+    protected List<Reservation> getReservationListToReservationList(List<GetReservation> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Reservation> list1 = new ArrayList<Reservation>( list.size() );
+        for ( GetReservation getReservation : list ) {
+            list1.add( getReservationToReservation( getReservation ) );
         }
 
         return list1;

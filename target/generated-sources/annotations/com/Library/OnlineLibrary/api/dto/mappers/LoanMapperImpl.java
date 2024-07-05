@@ -2,6 +2,7 @@ package com.Library.OnlineLibrary.api.dto.mappers;
 
 import com.Library.OnlineLibrary.api.dto.GetLoan;
 import com.Library.OnlineLibrary.domain.entities.Loan;
+import com.Library.OnlineLibrary.util.enums.Status;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-21T12:54:51-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
+    date = "2024-07-05T07:23:46-0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class LoanMapperImpl implements LoanMapper {
@@ -23,12 +24,14 @@ public class LoanMapperImpl implements LoanMapper {
 
         GetLoan.GetLoanBuilder getLoan = GetLoan.builder();
 
+        getLoan.book( loan.getBook() );
         getLoan.id( loan.getId() );
         getLoan.loanDate( loan.getLoanDate() );
         getLoan.returnDate( loan.getReturnDate() );
-        getLoan.status( loan.getStatus() );
+        if ( loan.getStatus() != null ) {
+            getLoan.status( loan.getStatus().name() );
+        }
         getLoan.user( loan.getUser() );
-        getLoan.book( loan.getBook() );
 
         return getLoan.build();
     }
@@ -39,16 +42,18 @@ public class LoanMapperImpl implements LoanMapper {
             return null;
         }
 
-        Loan.LoanBuilder loan = Loan.builder();
+        Loan loan = new Loan();
 
-        loan.id( getLoan.getId() );
-        loan.loanDate( getLoan.getLoanDate() );
-        loan.returnDate( getLoan.getReturnDate() );
-        loan.status( getLoan.getStatus() );
-        loan.user( getLoan.getUser() );
-        loan.book( getLoan.getBook() );
+        loan.setBook( getLoan.getBook() );
+        loan.setId( getLoan.getId() );
+        loan.setLoanDate( getLoan.getLoanDate() );
+        loan.setReturnDate( getLoan.getReturnDate() );
+        if ( getLoan.getStatus() != null ) {
+            loan.setStatus( Enum.valueOf( Status.class, getLoan.getStatus() ) );
+        }
+        loan.setUser( getLoan.getUser() );
 
-        return loan.build();
+        return loan;
     }
 
     @Override

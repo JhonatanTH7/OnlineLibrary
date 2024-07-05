@@ -2,6 +2,7 @@ package com.Library.OnlineLibrary.api.dto.mappers;
 
 import com.Library.OnlineLibrary.api.dto.GetReservation;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
+import com.Library.OnlineLibrary.util.enums.Status;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-21T12:54:51-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
+    date = "2024-07-05T07:23:46-0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class ReservationMapperImpl implements ReservationMapper {
@@ -23,11 +24,13 @@ public class ReservationMapperImpl implements ReservationMapper {
 
         GetReservation.GetReservationBuilder getReservation = GetReservation.builder();
 
+        getReservation.book( reservation.getBook() );
         getReservation.id( reservation.getId() );
         getReservation.reservationDate( reservation.getReservationDate() );
-        getReservation.status( reservation.getStatus() );
+        if ( reservation.getStatus() != null ) {
+            getReservation.status( reservation.getStatus().name() );
+        }
         getReservation.user( reservation.getUser() );
-        getReservation.book( reservation.getBook() );
 
         return getReservation.build();
     }
@@ -38,15 +41,17 @@ public class ReservationMapperImpl implements ReservationMapper {
             return null;
         }
 
-        Reservation.ReservationBuilder reservation = Reservation.builder();
+        Reservation reservation = new Reservation();
 
-        reservation.id( getReservation.getId() );
-        reservation.reservationDate( getReservation.getReservationDate() );
-        reservation.status( getReservation.getStatus() );
-        reservation.user( getReservation.getUser() );
-        reservation.book( getReservation.getBook() );
+        reservation.setBook( getReservation.getBook() );
+        reservation.setId( getReservation.getId() );
+        reservation.setReservationDate( getReservation.getReservationDate() );
+        if ( getReservation.getStatus() != null ) {
+            reservation.setStatus( Enum.valueOf( Status.class, getReservation.getStatus() ) );
+        }
+        reservation.setUser( getReservation.getUser() );
 
-        return reservation.build();
+        return reservation;
     }
 
     @Override
