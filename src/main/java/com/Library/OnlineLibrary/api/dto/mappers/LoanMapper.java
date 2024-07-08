@@ -1,23 +1,23 @@
 package com.Library.OnlineLibrary.api.dto.mappers;
 
-import com.Library.OnlineLibrary.api.dto.GetLoan;
-import com.Library.OnlineLibrary.domain.entities.Loan;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+// import com.Library.OnlineLibrary.api.dto.LoanRequest;
+// import com.Library.OnlineLibrary.domain.entities.Loan;
+// import org.mapstruct.InheritInverseConfiguration;
+// import org.mapstruct.Mapper;
+// import org.mapstruct.MappingConstants;
 
-import java.util.List;
+// import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface LoanMapper {
+// @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+// public interface LoanMapper {
 
-    GetLoan toGetDTO(Loan loan);
+//     LoanRequest toGetDTO(Loan loan);
 
-    @InheritInverseConfiguration
-    Loan toEntity(GetLoan getLoan);
+//     @InheritInverseConfiguration
+//     Loan toEntity(LoanRequest getLoan);
 
-    List<GetLoan> toGetLoanList(List<Loan> loans);
+//     List<LoanRequest> toGetLoanList(List<Loan> loans);
 
-    List<Loan> toEntityList(List<GetLoan> loans);
+//     List<Loan> toEntityList(List<LoanRequest> loans);
 
-}
+// }
