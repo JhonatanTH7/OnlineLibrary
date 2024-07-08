@@ -1,12 +1,12 @@
 package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
-import com.Library.OnlineLibrary.api.dto.request.BookRequest;
-import com.Library.OnlineLibrary.api.dto.response.BookResponse;
+import com.Library.OnlineLibrary.api.dto.request.UserRequest;
+import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
-import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.domain.entities.Loan;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
+import com.Library.OnlineLibrary.domain.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -18,43 +18,43 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Oracle Corporation)"
 )
 @Component
-public class BookMapperImpl implements BookMapper {
+public class UserMapperImpl implements UserMapper {
 
     @Override
-    public Book toEntity(BookRequest book) {
-        if ( book == null ) {
+    public User toEntity(UserRequest user) {
+        if ( user == null ) {
             return null;
         }
 
-        Book book1 = new Book();
+        User.UserBuilder user1 = User.builder();
 
-        book1.setTitle( book.getTitle() );
-        book1.setAuthor( book.getAuthor() );
-        book1.setPublicationYear( book.getPublicationYear() );
-        book1.setGenre( book.getGenre() );
-        book1.setIsbn( book.getIsbn() );
+        user1.userName( user.getUserName() );
+        user1.password( user.getPassword() );
+        user1.email( user.getEmail() );
+        user1.fullName( user.getFullName() );
+        user1.role( user.getRole() );
 
-        return book1;
+        return user1.build();
     }
 
     @Override
-    public BookResponse toResponseEntity(Book book) {
-        if ( book == null ) {
+    public UserResponse toEntity(User user) {
+        if ( user == null ) {
             return null;
         }
 
-        BookResponse bookResponse = new BookResponse();
+        UserResponse userResponse = new UserResponse();
 
-        bookResponse.setId( book.getId() );
-        bookResponse.setTitle( book.getTitle() );
-        bookResponse.setAuthor( book.getAuthor() );
-        bookResponse.setPublicationYear( book.getPublicationYear() );
-        bookResponse.setGenre( book.getGenre() );
-        bookResponse.setIsbn( book.getIsbn() );
-        bookResponse.setReservations( reservationListToReservationBasicResponseList( book.getReservations() ) );
-        bookResponse.setLoans( loanListToLoanBasicResponseList( book.getLoans() ) );
+        userResponse.setId( user.getId() );
+        userResponse.setUserName( user.getUserName() );
+        userResponse.setPassword( user.getPassword() );
+        userResponse.setEmail( user.getEmail() );
+        userResponse.setFullName( user.getFullName() );
+        userResponse.setRole( user.getRole() );
+        userResponse.setReservations( reservationListToReservationBasicResponseList( user.getReservations() ) );
+        userResponse.setLoans( loanListToLoanBasicResponseList( user.getLoans() ) );
 
-        return bookResponse;
+        return userResponse;
     }
 
     protected ReservationBasicResponse reservationToReservationBasicResponse(Reservation reservation) {

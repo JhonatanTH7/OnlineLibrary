@@ -1,18 +1,24 @@
 package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
-// import org.mapstruct.InheritInverseConfiguration;
-// import org.mapstruct.Mapper;
-// import org.mapstruct.MappingConstants;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
 
-// import com.Library.OnlineLibrary.api.dto.UserRequest;
-// import com.Library.OnlineLibrary.domain.entities.User;
+import com.Library.OnlineLibrary.api.dto.request.UserRequest;
+import com.Library.OnlineLibrary.api.dto.response.UserResponse;
+import com.Library.OnlineLibrary.domain.entities.User;
 
-// @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-// public interface UserMapper {
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface UserMapper {
 
-//     UserRequest toGetDTO(User user);
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "loans", ignore = true),
+            @Mapping(target = "reservations", ignore = true)
+    })
+    User toEntity(UserRequest user);
 
-//     @InheritInverseConfiguration
-//     User toEntity(UserRequest getUser);
+    UserResponse toEntity(User user);
 
-// }
+}
