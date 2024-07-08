@@ -17,6 +17,6 @@ public interface BookMapper {
     })
     Book toEntity(BookRequest book);
 
-    BookResponse toResponseEntity(Book book);
+    BookResponse toEntityResponse(Book book);
 
 }

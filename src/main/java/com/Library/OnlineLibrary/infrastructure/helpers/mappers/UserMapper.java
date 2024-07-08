@@ -7,6 +7,7 @@ import org.mapstruct.Mappings;
 
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
 import com.Library.OnlineLibrary.domain.entities.User;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -19,6 +20,8 @@ public interface UserMapper {
     })
     User toEntity(UserRequest user);
 
-    UserResponse toEntity(User user);
+    UserResponse toEntityResponse(User user);
+
+    UserBasicResponse toEntityBasicResponse(User user);
 
 }

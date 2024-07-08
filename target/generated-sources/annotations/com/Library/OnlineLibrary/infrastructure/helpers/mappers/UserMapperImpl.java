@@ -4,6 +4,7 @@ import com.Library.OnlineLibrary.api.dto.request.UserRequest;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
 import com.Library.OnlineLibrary.domain.entities.Loan;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
 import com.Library.OnlineLibrary.domain.entities.User;
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T11:59:55-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Oracle Corporation)"
+    date = "2024-07-08T12:53:17-0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -28,60 +29,51 @@ public class UserMapperImpl implements UserMapper {
 
         User.UserBuilder user1 = User.builder();
 
-        user1.userName( user.getUserName() );
-        user1.password( user.getPassword() );
         user1.email( user.getEmail() );
         user1.fullName( user.getFullName() );
+        user1.password( user.getPassword() );
         user1.role( user.getRole() );
+        user1.userName( user.getUserName() );
 
         return user1.build();
     }
 
     @Override
-    public UserResponse toEntity(User user) {
+    public UserResponse toEntityResponse(User user) {
         if ( user == null ) {
             return null;
         }
 
         UserResponse userResponse = new UserResponse();
 
-        userResponse.setId( user.getId() );
-        userResponse.setUserName( user.getUserName() );
-        userResponse.setPassword( user.getPassword() );
         userResponse.setEmail( user.getEmail() );
         userResponse.setFullName( user.getFullName() );
+        userResponse.setId( user.getId() );
+        userResponse.setPassword( user.getPassword() );
         userResponse.setRole( user.getRole() );
-        userResponse.setReservations( reservationListToReservationBasicResponseList( user.getReservations() ) );
+        userResponse.setUserName( user.getUserName() );
         userResponse.setLoans( loanListToLoanBasicResponseList( user.getLoans() ) );
+        userResponse.setReservations( reservationListToReservationBasicResponseList( user.getReservations() ) );
 
         return userResponse;
     }
 
-    protected ReservationBasicResponse reservationToReservationBasicResponse(Reservation reservation) {
-        if ( reservation == null ) {
+    @Override
+    public UserBasicResponse toEntityBasicResponse(User user) {
+        if ( user == null ) {
             return null;
         }
 
-        ReservationBasicResponse reservationBasicResponse = new ReservationBasicResponse();
+        UserBasicResponse userBasicResponse = new UserBasicResponse();
 
-        reservationBasicResponse.setId( reservation.getId() );
-        reservationBasicResponse.setReservationDate( reservation.getReservationDate() );
-        reservationBasicResponse.setStatus( reservation.getStatus() );
+        userBasicResponse.setEmail( user.getEmail() );
+        userBasicResponse.setFullName( user.getFullName() );
+        userBasicResponse.setId( user.getId() );
+        userBasicResponse.setPassword( user.getPassword() );
+        userBasicResponse.setRole( user.getRole() );
+        userBasicResponse.setUserName( user.getUserName() );
 
-        return reservationBasicResponse;
-    }
-
-    protected List<ReservationBasicResponse> reservationListToReservationBasicResponseList(List<Reservation> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<ReservationBasicResponse> list1 = new ArrayList<ReservationBasicResponse>( list.size() );
-        for ( Reservation reservation : list ) {
-            list1.add( reservationToReservationBasicResponse( reservation ) );
-        }
-
-        return list1;
+        return userBasicResponse;
     }
 
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {
@@ -107,6 +99,33 @@ public class UserMapperImpl implements UserMapper {
         List<LoanBasicResponse> list1 = new ArrayList<LoanBasicResponse>( list.size() );
         for ( Loan loan : list ) {
             list1.add( loanToLoanBasicResponse( loan ) );
+        }
+
+        return list1;
+    }
+
+    protected ReservationBasicResponse reservationToReservationBasicResponse(Reservation reservation) {
+        if ( reservation == null ) {
+            return null;
+        }
+
+        ReservationBasicResponse reservationBasicResponse = new ReservationBasicResponse();
+
+        reservationBasicResponse.setId( reservation.getId() );
+        reservationBasicResponse.setReservationDate( reservation.getReservationDate() );
+        reservationBasicResponse.setStatus( reservation.getStatus() );
+
+        return reservationBasicResponse;
+    }
+
+    protected List<ReservationBasicResponse> reservationListToReservationBasicResponseList(List<Reservation> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ReservationBasicResponse> list1 = new ArrayList<ReservationBasicResponse>( list.size() );
+        for ( Reservation reservation : list ) {
+            list1.add( reservationToReservationBasicResponse( reservation ) );
         }
 
         return list1;
