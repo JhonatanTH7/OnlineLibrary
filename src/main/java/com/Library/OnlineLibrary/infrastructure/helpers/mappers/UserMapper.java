@@ -1,4 +1,4 @@
-package com.Library.OnlineLibrary.api.dto.mappers;
+package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
 // import org.mapstruct.InheritInverseConfiguration;
 // import org.mapstruct.Mapper;
