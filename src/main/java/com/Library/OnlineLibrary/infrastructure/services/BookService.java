@@ -55,8 +55,10 @@ public class BookService implements IBookService {
         return bookPage.map(bookMapper::toEntityBasicResponse);
     }
 
+    @Override
     public Book find(Long id) {
         return this.bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No books found with the id: " + id));
     }
+
 }

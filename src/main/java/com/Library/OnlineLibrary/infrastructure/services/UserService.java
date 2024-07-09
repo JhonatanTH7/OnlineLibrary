@@ -47,6 +47,7 @@ public class UserService implements IUserService {
         this.userRepository.delete(this.find(id));
     }
 
+    @Override
     public User find(Long id) {
         return this.userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No users found with the id: " + id));
