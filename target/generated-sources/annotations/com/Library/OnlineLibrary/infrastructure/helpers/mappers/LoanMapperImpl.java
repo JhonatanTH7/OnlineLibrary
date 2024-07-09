@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T11:59:55-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.6 (Oracle Corporation)"
+    date = "2024-07-08T22:33:21-0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class LoanMapperImpl implements LoanMapper {
@@ -47,8 +47,8 @@ public class LoanMapperImpl implements LoanMapper {
         loanResponse.setLoanDate( loan.getLoanDate() );
         loanResponse.setReturnDate( loan.getReturnDate() );
         loanResponse.setStatus( loan.getStatus() );
-        loanResponse.setUser( userToUserBasicResponse( loan.getUser() ) );
         loanResponse.setBook( bookToBookBasicResponse( loan.getBook() ) );
+        loanResponse.setUser( userToUserBasicResponse( loan.getUser() ) );
 
         return loanResponse;
     }
@@ -77,23 +77,6 @@ public class LoanMapperImpl implements LoanMapper {
         return user.build();
     }
 
-    protected UserBasicResponse userToUserBasicResponse(User user) {
-        if ( user == null ) {
-            return null;
-        }
-
-        UserBasicResponse userBasicResponse = new UserBasicResponse();
-
-        userBasicResponse.setId( user.getId() );
-        userBasicResponse.setUserName( user.getUserName() );
-        userBasicResponse.setPassword( user.getPassword() );
-        userBasicResponse.setEmail( user.getEmail() );
-        userBasicResponse.setFullName( user.getFullName() );
-        userBasicResponse.setRole( user.getRole() );
-
-        return userBasicResponse;
-    }
-
     protected BookBasicResponse bookToBookBasicResponse(Book book) {
         if ( book == null ) {
             return null;
@@ -101,13 +84,30 @@ public class LoanMapperImpl implements LoanMapper {
 
         BookBasicResponse bookBasicResponse = new BookBasicResponse();
 
-        bookBasicResponse.setId( book.getId() );
-        bookBasicResponse.setTitle( book.getTitle() );
         bookBasicResponse.setAuthor( book.getAuthor() );
-        bookBasicResponse.setPublicationYear( book.getPublicationYear() );
         bookBasicResponse.setGenre( book.getGenre() );
+        bookBasicResponse.setId( book.getId() );
         bookBasicResponse.setIsbn( book.getIsbn() );
+        bookBasicResponse.setPublicationYear( book.getPublicationYear() );
+        bookBasicResponse.setTitle( book.getTitle() );
 
         return bookBasicResponse;
+    }
+
+    protected UserBasicResponse userToUserBasicResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserBasicResponse userBasicResponse = new UserBasicResponse();
+
+        userBasicResponse.setEmail( user.getEmail() );
+        userBasicResponse.setFullName( user.getFullName() );
+        userBasicResponse.setId( user.getId() );
+        userBasicResponse.setPassword( user.getPassword() );
+        userBasicResponse.setRole( user.getRole() );
+        userBasicResponse.setUserName( user.getUserName() );
+
+        return userBasicResponse;
     }
 }

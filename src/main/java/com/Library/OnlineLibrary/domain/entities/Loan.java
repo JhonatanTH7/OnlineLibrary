@@ -1,6 +1,6 @@
 package com.Library.OnlineLibrary.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -30,10 +30,10 @@ public class Loan {
     private Long id;
 
     @Column(nullable = false)
-    private Date loanDate;
+    private LocalDate loanDate;
 
     @Column(nullable = false)
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)

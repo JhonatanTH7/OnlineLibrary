@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -24,7 +24,7 @@ public class ReservationRequest {
     @Schema(description = "Date of the reservation", example = "08-10-2024")
     @NotNull(message = "Reservation date is required")
     @FutureOrPresent(message = "The reservation date must be in the present or future")
-    private Date reservationDate;
+    private LocalDate reservationDate;
     @Schema(description = "Reservation status", example = "ACTIVE")
     @NotNull(message = "Reservation status is required")
     @Pattern(regexp = "ACTIVE|INACTIVE", message = "Status must be either ACTIVE or INACTIVE")

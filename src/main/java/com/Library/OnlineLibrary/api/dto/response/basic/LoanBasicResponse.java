@@ -1,6 +1,6 @@
 package com.Library.OnlineLibrary.api.dto.response.basic;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -16,8 +16,8 @@ import lombok.Setter;
 public class LoanBasicResponse {
 
     private Long id;
-    private Date loanDate;
-    private Date returnDate;
+    private LocalDate loanDate;
+    private LocalDate returnDate;
     private Status status;
 
 }

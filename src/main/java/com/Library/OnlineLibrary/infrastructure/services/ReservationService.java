@@ -18,7 +18,7 @@ public class ReservationService implements IReservationService {
     }
 
     @Override
-    public ReservationResponse findById(Long id) {
+    public ReservationResponse getById(Long id) {
         return null;
     }
 

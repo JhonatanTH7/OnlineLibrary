@@ -2,6 +2,7 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T12:52:36-0500",
+    date = "2024-07-08T22:33:18-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -55,6 +56,24 @@ public class BookMapperImpl implements BookMapper {
         bookResponse.setReservations( reservationListToReservationBasicResponseList( book.getReservations() ) );
 
         return bookResponse;
+    }
+
+    @Override
+    public BookBasicResponse toEntityBasicResponse(Book book) {
+        if ( book == null ) {
+            return null;
+        }
+
+        BookBasicResponse bookBasicResponse = new BookBasicResponse();
+
+        bookBasicResponse.setAuthor( book.getAuthor() );
+        bookBasicResponse.setGenre( book.getGenre() );
+        bookBasicResponse.setId( book.getId() );
+        bookBasicResponse.setIsbn( book.getIsbn() );
+        bookBasicResponse.setPublicationYear( book.getPublicationYear() );
+        bookBasicResponse.setTitle( book.getTitle() );
+
+        return bookBasicResponse;
     }
 
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {

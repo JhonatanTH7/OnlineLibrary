@@ -17,7 +17,7 @@ public class LoanService implements ILoanService {
     }
 
     @Override
-    public LoanResponse findById(Long id) {
+    public LoanResponse getById(Long id) {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package com.Library.OnlineLibrary.domain.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -30,7 +30,7 @@ public class Reservation {
     private Long id;
 
     @Column(nullable = false)
-    private Date reservationDate;
+    private LocalDate reservationDate;
 
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)

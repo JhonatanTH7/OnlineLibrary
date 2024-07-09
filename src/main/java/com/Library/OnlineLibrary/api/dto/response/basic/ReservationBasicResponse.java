@@ -1,6 +1,6 @@
 package com.Library.OnlineLibrary.api.dto.response.basic;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -16,7 +16,7 @@ import lombok.Setter;
 public class ReservationBasicResponse {
 
     private Long id;
-    private Date reservationDate;
+    private LocalDate reservationDate;
     private Status status;
 
 }

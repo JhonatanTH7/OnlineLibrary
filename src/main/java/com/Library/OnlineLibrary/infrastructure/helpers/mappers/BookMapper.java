@@ -2,6 +2,7 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,5 +19,7 @@ public interface BookMapper {
     Book toEntity(BookRequest book);
 
     BookResponse toEntityResponse(Book book);
+
+    BookBasicResponse toEntityBasicResponse(Book book);
 
 }

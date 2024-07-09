@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.Library.OnlineLibrary.util.enums.Status;
 
@@ -24,11 +24,11 @@ public class LoanRequest {
     @Schema(description = "Loan date", example = "08-10-2024")
     @NotNull(message = "Loan date is required")
     @FutureOrPresent(message = "The loan date must be in the present or future")
-    private Date loanDate;
+    private LocalDate loanDate;
     @Schema(description = "Return date", example = "15-10-2024")
     @NotNull(message = "Return date is required")
     @FutureOrPresent(message = "The return date must be in the present or future")
-    private Date returnDate;
+    private LocalDate returnDate;
     @Schema(description = "Loan status", example = "ACTIVE")
     @NotNull(message = "Loan status is required")
     @Pattern(regexp = "ACTIVE|INACTIVE", message = "Status must be either ACTIVE or INACTIVE")

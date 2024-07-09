@@ -16,7 +16,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserResponse findById(Long id) {
+    public UserResponse getById(Long id) {
         return null;
     }
 
