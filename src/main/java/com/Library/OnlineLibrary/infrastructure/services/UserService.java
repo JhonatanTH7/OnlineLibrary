@@ -1,17 +1,14 @@
 package com.Library.OnlineLibrary.infrastructure.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
-import com.Library.OnlineLibrary.api.dto.response.LoanResponse;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
 import com.Library.OnlineLibrary.domain.entities.User;
 import com.Library.OnlineLibrary.domain.repositories.UserRepository;
-import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.ILoanService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IUserService;
 import com.Library.OnlineLibrary.infrastructure.helpers.mappers.UserMapper;
 import com.Library.OnlineLibrary.util.exceptions.ResourceNotFoundException;
@@ -24,9 +21,6 @@ public class UserService implements IUserService {
 
     @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
-    private final ILoanService iLoanService;
 
     @Autowired
     private final UserMapper userMapper;
@@ -61,8 +55,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<LoanResponse> getAllLoansByUser(Long idUser) {
-        return this.iLoanService.getAllByUser(this.find(idUser));
+    public UserLoansResponse getAllLoansByUser(Long idUser) {
+        return this.userMapper.toUserLoansResponse(this.find(idUser));
     }
 
 }

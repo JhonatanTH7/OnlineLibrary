@@ -2,9 +2,13 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.LoanInUserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
+import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.domain.entities.Loan;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
 import com.Library.OnlineLibrary.domain.entities.User;
@@ -15,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-09T10:57:11-0500",
+    date = "2024-07-09T12:11:10-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -89,6 +93,25 @@ public class UserMapperImpl implements UserMapper {
         user.setUserName( request.getUserName() );
     }
 
+    @Override
+    public UserLoansResponse toUserLoansResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserLoansResponse userLoansResponse = new UserLoansResponse();
+
+        userLoansResponse.setEmail( user.getEmail() );
+        userLoansResponse.setFullName( user.getFullName() );
+        userLoansResponse.setId( user.getId() );
+        userLoansResponse.setPassword( user.getPassword() );
+        userLoansResponse.setRole( user.getRole() );
+        userLoansResponse.setUserName( user.getUserName() );
+        userLoansResponse.setLoans( loanListToLoanInUserLoansResponseList( user.getLoans() ) );
+
+        return userLoansResponse;
+    }
+
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {
         if ( loan == null ) {
             return null;
@@ -139,6 +162,52 @@ public class UserMapperImpl implements UserMapper {
         List<ReservationBasicResponse> list1 = new ArrayList<ReservationBasicResponse>( list.size() );
         for ( Reservation reservation : list ) {
             list1.add( reservationToReservationBasicResponse( reservation ) );
+        }
+
+        return list1;
+    }
+
+    protected BookBasicResponse bookToBookBasicResponse(Book book) {
+        if ( book == null ) {
+            return null;
+        }
+
+        BookBasicResponse bookBasicResponse = new BookBasicResponse();
+
+        bookBasicResponse.setAuthor( book.getAuthor() );
+        bookBasicResponse.setGenre( book.getGenre() );
+        bookBasicResponse.setId( book.getId() );
+        bookBasicResponse.setIsbn( book.getIsbn() );
+        bookBasicResponse.setPublicationYear( book.getPublicationYear() );
+        bookBasicResponse.setTitle( book.getTitle() );
+
+        return bookBasicResponse;
+    }
+
+    protected LoanInUserLoansResponse loanToLoanInUserLoansResponse(Loan loan) {
+        if ( loan == null ) {
+            return null;
+        }
+
+        LoanInUserLoansResponse loanInUserLoansResponse = new LoanInUserLoansResponse();
+
+        loanInUserLoansResponse.setId( loan.getId() );
+        loanInUserLoansResponse.setLoanDate( loan.getLoanDate() );
+        loanInUserLoansResponse.setReturnDate( loan.getReturnDate() );
+        loanInUserLoansResponse.setStatus( loan.getStatus() );
+        loanInUserLoansResponse.setBook( bookToBookBasicResponse( loan.getBook() ) );
+
+        return loanInUserLoansResponse;
+    }
+
+    protected List<LoanInUserLoansResponse> loanListToLoanInUserLoansResponseList(List<Loan> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<LoanInUserLoansResponse> list1 = new ArrayList<LoanInUserLoansResponse>( list.size() );
+        for ( Loan loan : list ) {
+            list1.add( loanToLoanInUserLoansResponse( loan ) );
         }
 
         return list1;

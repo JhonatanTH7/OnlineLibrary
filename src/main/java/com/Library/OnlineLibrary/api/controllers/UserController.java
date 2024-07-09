@@ -1,7 +1,5 @@
 package com.Library.OnlineLibrary.api.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
-import com.Library.OnlineLibrary.api.dto.response.LoanResponse;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,7 +59,7 @@ public class UserController {
 
     @Operation(summary = "Search for all the loans associated to a user", description = "Displays the loans to which the id of the user is related to")
     @GetMapping(path = "/{idUser}/loans")
-    public ResponseEntity<List<LoanResponse>> getAllLoansByUser(@PathVariable Long idUser) {
+    public ResponseEntity<UserLoansResponse> getAllLoansByUser(@PathVariable Long idUser) {
         return ResponseEntity.ok(this.iUserService.getAllLoansByUser(idUser));
     }
 }

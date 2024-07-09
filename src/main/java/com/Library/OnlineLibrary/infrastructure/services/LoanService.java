@@ -1,14 +1,11 @@
 package com.Library.OnlineLibrary.infrastructure.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Library.OnlineLibrary.api.dto.request.LoanRequest;
 import com.Library.OnlineLibrary.api.dto.response.LoanResponse;
 import com.Library.OnlineLibrary.domain.entities.Loan;
-import com.Library.OnlineLibrary.domain.entities.User;
 import com.Library.OnlineLibrary.domain.repositories.LoanRepository;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IBookService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.ILoanService;
@@ -57,13 +54,6 @@ public class LoanService implements ILoanService {
     @Override
     public void delete(Long id) {
         this.loanRepository.delete(this.find(id));
-    }
-
-    @Override
-    public List<LoanResponse> getAllByUser(User user) {
-        return this.loanRepository.findByUser(user).stream().map(loan -> {
-            return loanMapper.toEntityResponse(loan);
-        }).toList();
     }
 
     public Loan find(Long id) {
