@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 @Getter
 @Setter
@@ -31,7 +30,6 @@ public class LoanRequest {
     private LocalDate returnDate;
     @Schema(description = "Loan status", example = "ACTIVE")
     @NotNull(message = "Loan status is required")
-    @Pattern(regexp = "ACTIVE|INACTIVE", message = "Status must be either ACTIVE or INACTIVE")
     private Status status;
     @Schema(description = "ID of the user who made the loan", example = "1")
     @NotNull(message = "The id of the user is required")
