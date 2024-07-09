@@ -28,7 +28,8 @@ public class BookService implements IBookService {
 
     @Override
     public BookBasicResponse create(BookRequest request) {
-        return null;
+        Book book = bookMapper.toEntity(request);
+        return bookMapper.toEntityBasicResponse(this.bookRepository.save(book));
     }
 
     @Override
@@ -38,7 +39,9 @@ public class BookService implements IBookService {
 
     @Override
     public BookBasicResponse update(BookRequest request, Long id) {
-        return null;
+        Book oldBook = this.find(id);
+        this.bookMapper.toExistingEntity(request, oldBook);
+        return this.bookMapper.toEntityBasicResponse(this.bookRepository.save(oldBook));
     }
 
     @Override
