@@ -28,8 +28,8 @@ public class BookService implements IBookService {
 
     @Override
     public BookBasicResponse create(BookRequest request) {
-        Book book = bookMapper.toEntity(request);
-        return bookMapper.toEntityBasicResponse(this.bookRepository.save(book));
+        Book book = this.bookMapper.toEntity(request);
+        return this.bookMapper.toEntityBasicResponse(this.bookRepository.save(book));
     }
 
     @Override
