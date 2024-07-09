@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.Library.OnlineLibrary.api.dto.request.LoanRequest;
 import com.Library.OnlineLibrary.api.dto.response.LoanResponse;
 import com.Library.OnlineLibrary.domain.entities.Loan;
+import com.Library.OnlineLibrary.domain.entities.User;
 import com.Library.OnlineLibrary.domain.repositories.LoanRepository;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IBookService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.ILoanService;
@@ -59,8 +60,8 @@ public class LoanService implements ILoanService {
     }
 
     @Override
-    public List<LoanResponse> getAllByUser(Long idUser) {
-        return this.loanRepository.findByUser(this.userService.find(idUser)).stream().map(loan -> {
+    public List<LoanResponse> getAllByUser(User user) {
+        return this.loanRepository.findByUser(user).stream().map(loan -> {
             return loanMapper.toEntityResponse(loan);
         }).toList();
     }

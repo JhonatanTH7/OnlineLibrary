@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.Library.OnlineLibrary.api.dto.request.LoanRequest;
 import com.Library.OnlineLibrary.api.dto.response.LoanResponse;
+import com.Library.OnlineLibrary.domain.entities.User;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEndpointsServices.ICreateService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEndpointsServices.IDeleteService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEndpointsServices.IGetByIdService;
@@ -17,5 +18,5 @@ public interface ILoanService extends
         IGetByIdService<LoanResponse, Long>,
         IUpdateService<LoanRequest, LoanResponse, Long>,
         IDeleteService<Long> {
-    List<LoanResponse> getAllByUser(Long idUser);
+    List<LoanResponse> getAllByUser(User user);
 }

@@ -62,7 +62,7 @@ public class UserService implements IUserService {
 
     @Override
     public List<LoanResponse> getAllLoansByUser(Long idUser) {
-        return this.iLoanService.getAllByUser(idUser);
-    }   
+        return this.iLoanService.getAllByUser(this.find(idUser));
+    }
 
 }
