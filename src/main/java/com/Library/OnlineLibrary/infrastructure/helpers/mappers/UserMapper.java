@@ -3,6 +3,7 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
@@ -23,5 +24,12 @@ public interface UserMapper {
     UserResponse toEntityResponse(User user);
 
     UserBasicResponse toEntityBasicResponse(User user);
+
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "loans", ignore = true),
+            @Mapping(target = "reservations", ignore = true)
+    })
+    void toExistingEntity(UserRequest request, @MappingTarget User user);
 
 }

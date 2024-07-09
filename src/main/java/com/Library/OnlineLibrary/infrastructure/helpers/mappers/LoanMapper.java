@@ -6,6 +6,7 @@ import com.Library.OnlineLibrary.domain.entities.Loan;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -19,5 +20,12 @@ public interface LoanMapper {
     Loan toEntity(LoanRequest loan);
 
     LoanResponse toEntityResponse(Loan loan);
+
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "book", ignore = true),
+            @Mapping(target = "user", ignore = true)
+    })
+    void toExistingEntity(LoanRequest request, @MappingTarget Loan loan);
 
 }

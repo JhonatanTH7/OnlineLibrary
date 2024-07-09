@@ -3,6 +3,7 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 import com.Library.OnlineLibrary.api.dto.request.ReservationRequest;
@@ -21,4 +22,11 @@ public interface ReservationMapper {
 
     ReservationResponse toEntityResponse(Reservation reservation);
 
+    @Mappings({
+            @Mapping(target = "id", ignore = true),
+            @Mapping(target = "book", ignore = true),
+            @Mapping(target = "user", ignore = true)
+    })
+    void toExistingEntity(ReservationRequest request, @MappingTarget Reservation reservation);
+    
 }

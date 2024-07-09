@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T22:33:20-0500",
+    date = "2024-07-08T23:17:04-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -49,6 +49,16 @@ public class ReservationMapperImpl implements ReservationMapper {
         reservationResponse.setUser( userToUserBasicResponse( reservation.getUser() ) );
 
         return reservationResponse;
+    }
+
+    @Override
+    public void toExistingEntity(ReservationRequest request, Reservation reservation) {
+        if ( request == null ) {
+            return;
+        }
+
+        reservation.setReservationDate( request.getReservationDate() );
+        reservation.setStatus( request.getStatus() );
     }
 
     protected Book reservationRequestToBook(ReservationRequest reservationRequest) {

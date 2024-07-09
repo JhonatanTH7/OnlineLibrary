@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T22:33:21-0500",
+    date = "2024-07-08T23:17:47-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -74,6 +74,19 @@ public class UserMapperImpl implements UserMapper {
         userBasicResponse.setUserName( user.getUserName() );
 
         return userBasicResponse;
+    }
+
+    @Override
+    public void toExistingEntity(UserRequest request, User user) {
+        if ( request == null ) {
+            return;
+        }
+
+        user.setEmail( request.getEmail() );
+        user.setFullName( request.getFullName() );
+        user.setPassword( request.getPassword() );
+        user.setRole( request.getRole() );
+        user.setUserName( request.getUserName() );
     }
 
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {

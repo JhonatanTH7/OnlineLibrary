@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-08T22:58:33-0500",
+    date = "2024-07-08T23:16:52-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -77,16 +77,16 @@ public class BookMapperImpl implements BookMapper {
     }
 
     @Override
-    public void toExistingEntity(BookRequest bookRequest, Book book) {
-        if ( bookRequest == null ) {
+    public void toExistingEntity(BookRequest request, Book book) {
+        if ( request == null ) {
             return;
         }
 
-        book.setAuthor( bookRequest.getAuthor() );
-        book.setGenre( bookRequest.getGenre() );
-        book.setIsbn( bookRequest.getIsbn() );
-        book.setPublicationYear( bookRequest.getPublicationYear() );
-        book.setTitle( bookRequest.getTitle() );
+        book.setAuthor( request.getAuthor() );
+        book.setGenre( request.getGenre() );
+        book.setIsbn( request.getIsbn() );
+        book.setPublicationYear( request.getPublicationYear() );
+        book.setTitle( request.getTitle() );
     }
 
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {
