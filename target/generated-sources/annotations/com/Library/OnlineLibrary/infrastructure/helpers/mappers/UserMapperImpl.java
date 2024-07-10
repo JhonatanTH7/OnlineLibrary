@@ -6,8 +6,10 @@ import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
-import com.Library.OnlineLibrary.api.dto.response.specific.LoanInUserLoansResponse;
-import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_loans.LoanInUserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_loans.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_reservations.ReservationInUserReservationsResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_reservations.UserReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.domain.entities.Loan;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-09T12:11:10-0500",
+    date = "2024-07-09T19:30:13-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -110,6 +112,25 @@ public class UserMapperImpl implements UserMapper {
         userLoansResponse.setLoans( loanListToLoanInUserLoansResponseList( user.getLoans() ) );
 
         return userLoansResponse;
+    }
+
+    @Override
+    public UserReservationsResponse toUserReservationsResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserReservationsResponse userReservationsResponse = new UserReservationsResponse();
+
+        userReservationsResponse.setEmail( user.getEmail() );
+        userReservationsResponse.setFullName( user.getFullName() );
+        userReservationsResponse.setId( user.getId() );
+        userReservationsResponse.setPassword( user.getPassword() );
+        userReservationsResponse.setRole( user.getRole() );
+        userReservationsResponse.setUserName( user.getUserName() );
+        userReservationsResponse.setReservations( reservationListToReservationInUserReservationsResponseList( user.getReservations() ) );
+
+        return userReservationsResponse;
     }
 
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {
@@ -208,6 +229,34 @@ public class UserMapperImpl implements UserMapper {
         List<LoanInUserLoansResponse> list1 = new ArrayList<LoanInUserLoansResponse>( list.size() );
         for ( Loan loan : list ) {
             list1.add( loanToLoanInUserLoansResponse( loan ) );
+        }
+
+        return list1;
+    }
+
+    protected ReservationInUserReservationsResponse reservationToReservationInUserReservationsResponse(Reservation reservation) {
+        if ( reservation == null ) {
+            return null;
+        }
+
+        ReservationInUserReservationsResponse reservationInUserReservationsResponse = new ReservationInUserReservationsResponse();
+
+        reservationInUserReservationsResponse.setId( reservation.getId() );
+        reservationInUserReservationsResponse.setReservationDate( reservation.getReservationDate() );
+        reservationInUserReservationsResponse.setStatus( reservation.getStatus() );
+        reservationInUserReservationsResponse.setBook( bookToBookBasicResponse( reservation.getBook() ) );
+
+        return reservationInUserReservationsResponse;
+    }
+
+    protected List<ReservationInUserReservationsResponse> reservationListToReservationInUserReservationsResponseList(List<Reservation> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ReservationInUserReservationsResponse> list1 = new ArrayList<ReservationInUserReservationsResponse>( list.size() );
+        for ( Reservation reservation : list ) {
+            list1.add( reservationToReservationInUserReservationsResponse( reservation ) );
         }
 
         return list1;

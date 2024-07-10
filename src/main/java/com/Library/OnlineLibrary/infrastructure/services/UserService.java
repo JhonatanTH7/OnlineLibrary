@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
-import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_loans.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_reservations.UserReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.User;
 import com.Library.OnlineLibrary.domain.repositories.UserRepository;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IUserService;
@@ -57,6 +58,11 @@ public class UserService implements IUserService {
     @Override
     public UserLoansResponse getAllLoansByUser(Long idUser) {
         return this.userMapper.toUserLoansResponse(this.find(idUser));
+    }
+
+    @Override
+    public UserReservationsResponse getAllReservationsByUser(Long idUser) {
+        return this.userMapper.toUserReservationsResponse(this.find(idUser));
     }
 
 }

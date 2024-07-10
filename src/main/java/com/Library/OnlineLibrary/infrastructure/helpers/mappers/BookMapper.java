@@ -3,6 +3,7 @@ package com.Library.OnlineLibrary.infrastructure.helpers.mappers;
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.BookReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -29,5 +30,6 @@ public interface BookMapper {
                         @Mapping(target = "reservations", ignore = true)
         })
         void toExistingEntity(BookRequest request, @MappingTarget Book book);
-        
+
+        BookReservationsResponse toBookReservationsResponse(Book book);
 }

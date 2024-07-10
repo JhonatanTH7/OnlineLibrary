@@ -1,7 +1,8 @@
-package com.Library.OnlineLibrary.api.dto.response.specific;
+package com.Library.OnlineLibrary.api.dto.response.specific.book_reservations;
+
+import java.util.List;
 
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
-import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +13,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoanInUserLoansResponse extends LoanBasicResponse {
+public class BookReservationsResponse extends BookBasicResponse {
 
-    private BookBasicResponse book;
+    private List<ReservationInBookReservationsResponse> reservations;
 
 }

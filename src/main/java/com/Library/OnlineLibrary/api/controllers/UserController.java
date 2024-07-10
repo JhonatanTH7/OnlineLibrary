@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Library.OnlineLibrary.api.dto.request.UserRequest;
 import com.Library.OnlineLibrary.api.dto.response.UserResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
-import com.Library.OnlineLibrary.api.dto.response.specific.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_loans.UserLoansResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.user_reservations.UserReservationsResponse;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,4 +63,11 @@ public class UserController {
     public ResponseEntity<UserLoansResponse> getAllLoansByUser(@PathVariable Long idUser) {
         return ResponseEntity.ok(this.iUserService.getAllLoansByUser(idUser));
     }
+
+    @Operation(summary = "Search for all the reservations associated to a user", description = "Displays the reservations to which the id of the user is related to")
+    @GetMapping(path = "/{idUser}/reservations")
+    public ResponseEntity<UserReservationsResponse> getAllReservationsByUser(@PathVariable Long idUser) {
+        return ResponseEntity.ok(this.iUserService.getAllReservationsByUser(idUser));
+    }
+
 }

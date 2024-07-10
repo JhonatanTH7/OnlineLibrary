@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.BookReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEndpointsServices.ICreateService;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEndpointsServices.IDeleteService;
@@ -20,4 +21,6 @@ public interface IBookService extends
                 IDeleteService<Long>,
                 IGetAllService<BookBasicResponse> {
         Book find(Long id);
+
+        BookReservationsResponse getAllReservationsByBook(Long idBook);
 }

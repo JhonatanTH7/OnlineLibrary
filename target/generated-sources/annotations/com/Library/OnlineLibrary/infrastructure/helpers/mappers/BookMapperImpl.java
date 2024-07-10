@@ -5,9 +5,13 @@ import com.Library.OnlineLibrary.api.dto.response.BookResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.LoanBasicResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.ReservationBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.basic.UserBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.BookReservationsResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.ReservationInBookReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.domain.entities.Loan;
 import com.Library.OnlineLibrary.domain.entities.Reservation;
+import com.Library.OnlineLibrary.domain.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-09T11:48:48-0500",
+    date = "2024-07-09T19:34:34-0500",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.39.0.v20240620-1855, environment: Java 17.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -89,6 +93,25 @@ public class BookMapperImpl implements BookMapper {
         book.setTitle( request.getTitle() );
     }
 
+    @Override
+    public BookReservationsResponse toBookReservationsResponse(Book book) {
+        if ( book == null ) {
+            return null;
+        }
+
+        BookReservationsResponse bookReservationsResponse = new BookReservationsResponse();
+
+        bookReservationsResponse.setAuthor( book.getAuthor() );
+        bookReservationsResponse.setGenre( book.getGenre() );
+        bookReservationsResponse.setId( book.getId() );
+        bookReservationsResponse.setIsbn( book.getIsbn() );
+        bookReservationsResponse.setPublicationYear( book.getPublicationYear() );
+        bookReservationsResponse.setTitle( book.getTitle() );
+        bookReservationsResponse.setReservations( reservationListToReservationInBookReservationsResponseList( book.getReservations() ) );
+
+        return bookReservationsResponse;
+    }
+
     protected LoanBasicResponse loanToLoanBasicResponse(Loan loan) {
         if ( loan == null ) {
             return null;
@@ -139,6 +162,51 @@ public class BookMapperImpl implements BookMapper {
         List<ReservationBasicResponse> list1 = new ArrayList<ReservationBasicResponse>( list.size() );
         for ( Reservation reservation : list ) {
             list1.add( reservationToReservationBasicResponse( reservation ) );
+        }
+
+        return list1;
+    }
+
+    protected UserBasicResponse userToUserBasicResponse(User user) {
+        if ( user == null ) {
+            return null;
+        }
+
+        UserBasicResponse userBasicResponse = new UserBasicResponse();
+
+        userBasicResponse.setEmail( user.getEmail() );
+        userBasicResponse.setFullName( user.getFullName() );
+        userBasicResponse.setId( user.getId() );
+        userBasicResponse.setPassword( user.getPassword() );
+        userBasicResponse.setRole( user.getRole() );
+        userBasicResponse.setUserName( user.getUserName() );
+
+        return userBasicResponse;
+    }
+
+    protected ReservationInBookReservationsResponse reservationToReservationInBookReservationsResponse(Reservation reservation) {
+        if ( reservation == null ) {
+            return null;
+        }
+
+        ReservationInBookReservationsResponse reservationInBookReservationsResponse = new ReservationInBookReservationsResponse();
+
+        reservationInBookReservationsResponse.setId( reservation.getId() );
+        reservationInBookReservationsResponse.setReservationDate( reservation.getReservationDate() );
+        reservationInBookReservationsResponse.setStatus( reservation.getStatus() );
+        reservationInBookReservationsResponse.setUser( userToUserBasicResponse( reservation.getUser() ) );
+
+        return reservationInBookReservationsResponse;
+    }
+
+    protected List<ReservationInBookReservationsResponse> reservationListToReservationInBookReservationsResponseList(List<Reservation> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ReservationInBookReservationsResponse> list1 = new ArrayList<ReservationInBookReservationsResponse>( list.size() );
+        for ( Reservation reservation : list ) {
+            list1.add( reservationToReservationInBookReservationsResponse( reservation ) );
         }
 
         return list1;

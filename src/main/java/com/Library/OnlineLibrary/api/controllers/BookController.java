@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.BookReservationsResponse;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IBookService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -69,6 +70,12 @@ public class BookController {
         if (page != 0)
             pageable = PageRequest.of(page - 1, size);
         return ResponseEntity.ok(this.iBookService.getAll(pageable));
+    }
+
+    @Operation(summary = "Search for all the reservations associated to a book", description = "Displays the reservations to which the id of the book is related to")
+    @GetMapping(path = "/{idBook}/reservations")
+    public ResponseEntity<BookReservationsResponse> getAllReservationsByBook(@PathVariable Long idBook) {
+        return ResponseEntity.ok(this.iBookService.getAllReservationsByBook(idBook));
     }
 
 }

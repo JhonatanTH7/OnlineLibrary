@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.Library.OnlineLibrary.api.dto.request.BookRequest;
 import com.Library.OnlineLibrary.api.dto.response.BookResponse;
 import com.Library.OnlineLibrary.api.dto.response.basic.BookBasicResponse;
+import com.Library.OnlineLibrary.api.dto.response.specific.book_reservations.BookReservationsResponse;
 import com.Library.OnlineLibrary.domain.entities.Book;
 import com.Library.OnlineLibrary.domain.repositories.BookRepository;
 import com.Library.OnlineLibrary.infrastructure.abstract_services.IEntityService.IBookService;
@@ -59,6 +60,11 @@ public class BookService implements IBookService {
     public Book find(Long id) {
         return this.bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No books found with the id: " + id));
+    }
+
+    @Override
+    public BookReservationsResponse getAllReservationsByBook(Long idBook) {
+        return this.bookMapper.toBookReservationsResponse(this.find(idBook));
     }
 
 }

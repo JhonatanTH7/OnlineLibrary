@@ -1,4 +1,4 @@
-package com.Library.OnlineLibrary.api.dto.response.specific;
+package com.Library.OnlineLibrary.api.dto.response.specific.user_loans;
 
 import java.util.List;
 
